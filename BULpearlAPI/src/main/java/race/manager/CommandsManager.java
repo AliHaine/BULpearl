@@ -1,6 +1,7 @@
 package race.manager;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,24 +20,20 @@ public class CommandsManager implements CommandExecutor {
 			if (label.equalsIgnoreCase("bulpearl")) {
 				
 				if (!(sender.hasPermission("bulpearl.reload"))) {
-					sender.sendMessage(cg.getConfig().getString("message.reload_noperm").replace('&', '§'));
+					sender.sendMessage(ChatColor.translateAlternateColorCodes('&', cg.getConfig().getString("message.reload_noperm")));
 					return false;
 				}
 				
 				if (args0[0].equalsIgnoreCase("reload") || args0[0].equalsIgnoreCase("rl")) {
 					if (sender instanceof Player) {
-						sender.sendMessage(cg.getConfig().getString("message.reload").replace('&', '§'));
-	                    Bukkit.getPluginManager().disablePlugin(Main.getInstance());
-	                    Bukkit.getPluginManager().getPlugin("BULpearl").reloadConfig();
-	                    Bukkit.getPluginManager().enablePlugin(Main.getInstance());
-						return true;
+						sender.sendMessage(ChatColor.translateAlternateColorCodes('&', cg.getConfig().getString("message.reload")));
 					} else {
-						System.out.println(cg.getConfig().getString("message.reload").replace('&', '§'));
-	                    Bukkit.getPluginManager().disablePlugin(Main.getInstance());
-	                    Bukkit.getPluginManager().getPlugin("BULpearl").reloadConfig();
-	                    Bukkit.getPluginManager().enablePlugin(Main.getInstance());
-						return true;
+						System.out.println(ChatColor.translateAlternateColorCodes('&', cg.getConfig().getString("message.reload")));
 					}
+					Bukkit.getPluginManager().disablePlugin(Main.getInstance());
+					Bukkit.getPluginManager().getPlugin("BULpearl").reloadConfig();
+					Bukkit.getPluginManager().enablePlugin(Main.getInstance());
+					return true;
 				}
 			}
 

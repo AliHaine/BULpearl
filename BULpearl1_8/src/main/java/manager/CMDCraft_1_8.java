@@ -23,8 +23,8 @@ public class CMDCraft_1_8 implements CommandExecutor {
                     System.out.println("You can't make this command from the console");
                     return false;
                 } else {
-                    CraftManager_1_9 cm9 = new CraftManager_1_9();
-                    cm9.CraftInventory((Player) sender);
+                    CraftManager_1_8 cm8 = new CraftManager_1_8();
+                    cm8.CraftInventory((Player) sender);
                     return true;
                 }
             }

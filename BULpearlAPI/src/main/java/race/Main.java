@@ -13,18 +13,18 @@ import java.util.ArrayList;
 
 public class Main extends JavaPlugin {
 
-	final File file = new File(this.getDataFolder(), "craftregister.yml");
-	final YamlConfiguration confcraft = YamlConfiguration.loadConfiguration(file);
+	private final File file = new File(this.getDataFolder(), "craftregister.yml");
+	private final YamlConfiguration confcraft = YamlConfiguration.loadConfiguration(file);
 	private static Main instance;
 
 	public void onEnable() {
 		
         new UpdateCheckerManager(this, 93260).getVersion(version -> {
             if (!this.getDescription().getVersion().equalsIgnoreCase(version)) {
-                Bukkit.getLogger().info("------------------------------------------------------------------");
-                Bukkit.getLogger().info("There is a new update available for BULPearl !");
-                Bukkit.getLogger().info("Download here : https://www.spigotmc.org/resources/bulpearl-ender-pearl-cooldown-damage-modifier-and-other.93260/updates");
-                Bukkit.getLogger().info("------------------------------------------------------------------");    
+                getLogger().info("------------------------------------------------------------------");
+                getLogger().info("There is a new update available for BULPearl !");
+                getLogger().info("Download here : https://www.spigotmc.org/resources/bulpearl-ender-pearl-cooldown-damage-modifier-and-other.93260/updates");
+                getLogger().info("------------------------------------------------------------------");
             }
         });
 
@@ -32,15 +32,14 @@ public class Main extends JavaPlugin {
 		instance = this;
 		saveDefaultConfig();
 		getCommand("bulpearl").setExecutor(new CommandsManager());
-		getServer().getPluginManager().registerEvents(new VersionChecker(), this);
-		System.out.println("[BULpearl] Finding your current server version..");
-		VersionChecker vc = new VersionChecker();
+		final VersionChecker vc = new VersionChecker();
+		getLogger().info("[BULpearl] Finding your current server version..");
 		vc.versionCheck();
-		System.out.println("[BULpearl] Enable BULPearl");
+		getLogger().info("[BULpearl] Enable BULPearl");
 	}
 
 	public void onDisable() {
-		System.out.println("[BULpearl] Disable BULPearl");
+		getLogger().info("[BULpearl] Disable BULPearl");
 	}
 
 	public static Main getInstance() {
@@ -48,8 +47,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	public ArrayList<String> getWorld() {
-		ArrayList<String> ww = new ArrayList<String>(getConfig().getStringList("cooldown_blacklist_world"));
-		return ww;
+		return new ArrayList<String>(getConfig().getStringList("cooldown_blacklist_world"));
 	}
 
 	private void createCustomConfig() {

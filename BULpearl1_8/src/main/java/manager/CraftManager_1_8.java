@@ -15,6 +15,9 @@ import race.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class CraftManager_1_8 implements Listener {
@@ -36,40 +39,19 @@ public class CraftManager_1_8 implements Listener {
         valid1.setDisplayName("§aCreate craft");
         valid.setItemMeta(valid1);
 
-        craftinv.setItem(0, deco);
-        craftinv.setItem(1, deco);
-        craftinv.setItem(2, deco);
-        craftinv.setItem(6, deco);
-        craftinv.setItem(7, deco);
-        craftinv.setItem(8, deco);
-        craftinv.setItem(9, deco);
-        craftinv.setItem(10, deco);
-        craftinv.setItem(11, deco);
-        craftinv.setItem(15, deco);
+        final ArrayList<Integer> deeco = new ArrayList<Integer>(Arrays.asList(0,1,2,6,7,8,9,10,11,15,17,18,19,20,24,25,26));
+
+        for (final Integer position : deeco) {
+            craftinv.setItem(position, deco);
+        }
+
         craftinv.setItem(16, valid);
-        craftinv.setItem(17, deco);
-        craftinv.setItem(18, deco);
-        craftinv.setItem(19, deco);
-        craftinv.setItem(20, deco);
-        craftinv.setItem(24, deco);
-        craftinv.setItem(25, deco);
-        craftinv.setItem(26, deco);
 
         player.openInventory(craftinv);
     }
 
     @EventHandler()
-    public void OnInventoryClick(InventoryClickEvent e) throws IOException {
-
-        ItemStack valid = new ItemStack(Material.EMERALD_BLOCK);
-        ItemMeta valid1 = valid.getItemMeta();
-        valid1.setDisplayName("§aCreate craft");
-        valid.setItemMeta(valid1);
-
-        ItemStack deco = new ItemStack(Material.GLASS);
-        ItemMeta deco1 = deco.getItemMeta();
-        deco1.setDisplayName(" ");
-        deco.setItemMeta(deco1);
+    public void onInventoryClick(InventoryClickEvent e) throws IOException {
 
         Player p = (Player) e.getWhoClicked();
 
@@ -80,6 +62,16 @@ public class CraftManager_1_8 implements Listener {
         if (e.getCurrentItem() == null) {
             return;
         }
+
+        ItemStack valid = new ItemStack(Material.EMERALD_BLOCK);
+        ItemMeta valid1 = valid.getItemMeta();
+        valid1.setDisplayName("§aCreate craft");
+        valid.setItemMeta(valid1);
+
+        ItemStack deco = new ItemStack(Material.GLASS);
+        ItemMeta deco1 = deco.getItemMeta();
+        deco1.setDisplayName(" ");
+        deco.setItemMeta(deco1);
 
         if (e.getCurrentItem().getType().equals(Material.EMERALD_BLOCK) || e.getCurrentItem().getType().equals(Material.GLASS)) {
             e.setCancelled(true);
